@@ -10,7 +10,7 @@ impl<'a> System<'a> for PosPrinter {
 
     fn run(&mut self, position: Self::SystemData) {
         for position in position.join() {
-            println!("Hello, {:?}", &position);
+            println!("{:?}", &position);
         }
     }
 }
@@ -28,7 +28,7 @@ impl<'a> System<'a> for UpdatePos {
         let delta = delta.0;
 
         for (vel, pos) in (&velocities, &mut positions).join() {
-            pos.accumulate_v(*vel, delta);
+            pos.accumulate_v(vel, delta);
         }
     }
 }

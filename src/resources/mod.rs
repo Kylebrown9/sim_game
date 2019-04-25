@@ -1,10 +1,10 @@
 use std::time::Duration;
 
 #[derive(Default)]
-pub struct DeltaTime(pub Duration);
+pub struct DeltaTime(pub f32);
 
 impl DeltaTime {
-    pub fn new(secs: u64, nanos: u32) -> Self {
-        DeltaTime(Duration::new(secs, nanos))
+    pub fn new(duration: f32) -> Self {
+        DeltaTime(duration)
     }
 }

@@ -20,12 +20,18 @@ fn main() {
     world.register::<Position>();
     world.register::<Velocity>();
 
-    world.add_resource(DeltaTime::new(1, 0));
+    world.add_resource(DeltaTime::new(1.0));
 
-    let ball = world.create_entity().with(Position::new(0.0, 0.0)).build();
+    let ball = world.create_entity()
+        .with(Position::new(0.0, 0.0))
+        .with(Velocity::meters_per_second(1.0, 2.0))
+        .build();
 
     let mut dispatcher = DispatcherBuilder::new()
         .with(UpdatePos, "update_position", &[])
         .with(PosPrinter, "position_printer", &["update_position"])
         .build();
+
+    dispatcher.dispatch(&world.res);
+    dispatcher.dispatch(&world.res);
 }
